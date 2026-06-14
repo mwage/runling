@@ -19,6 +19,12 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Repo name (without owner), used for both the asset public-url and the
+    # <base> rewrite so links work under username.github.io/<repo>/. Defined at
+    # job scope so every step can see it — a step-level `env:` would only be
+    # visible inside that one step.
+    env:
+      RUNLING_BASE: ${{ github.event.repository.name }}
     steps:
       - uses: actions/checkout@v4
 
@@ -36,10 +42,6 @@ jobs:
           version: latest
 
       - name: Build
-        env:
-          # Repo name (without owner), used both for the router base and the
-          # asset public-url so links work under username.github.io/<repo>/.
-          RUNLING_BASE: ${{ github.event.repository.name }}
         run: trunk build --release --public-url "/${RUNLING_BASE}/"
 
       - name: Rewrite <base> for subpath
