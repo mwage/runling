@@ -1,0 +1,481 @@
+/* ============================================================
+   Runling website — ported from the original Angular 4 site.
+   The original loaded Bootstrap 3.3.6 from a CDN; here we provide
+   a small Bootstrap-3-like grid (only the classes the site uses)
+   so the layout is visually equivalent without the dependency.
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- minimal Bootstrap-3-like grid ---------- */
+
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+[class*="col-"] {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding: 0 15px;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* extra-small (default, all widths) */
+.col-xs-12 { width: 100%; }
+.col-xs-6 { width: 50%; }
+
+/* small (>= 768px) */
+@media (min-width: 768px) {
+    .col-sm-12 { width: 100%; }
+    .col-sm-8 { width: 66.66667%; }
+    .col-sm-7 { width: 58.33333%; }
+    .col-sm-6 { width: 50%; }
+    .col-sm-5 { width: 41.66667%; }
+    .col-sm-4 { width: 33.33333%; }
+    .col-sm-offset-0 { margin-left: 0; }
+}
+
+/* medium (>= 992px) */
+@media (min-width: 992px) {
+    .col-md-12 { width: 100%; }
+    .col-md-9 { width: 75%; }
+    .col-md-8 { width: 66.66667%; }
+    .col-md-4 { width: 33.33333%; }
+    .col-md-3 { width: 25%; }
+    .col-md-offset-2 { margin-left: 16.66667%; }
+}
+
+/* Bootstrap button base (used on the download page) */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+/* ============================================================
+   Global styles (from public/stylesheets/style.css)
+   ============================================================ */
+
+body {
+    background-image: url("images/background-image.jpg");
+    background-repeat: no-repeat;
+    background-color: rgb(10, 10, 15);
+    background-size: 100vw auto;
+    color: white;
+    text-align: center;
+}
+
+@media screen and (max-width: 720px) {
+    body {
+        background-size: 720px auto;
+    }
+}
+
+.showgrid {
+    border: solid 1px red;
+}
+
+h2 {
+    margin-top: 0;
+    padding-bottom: 20px;
+    color: rgb(200, 200, 200);
+}
+
+p {
+    text-align: left;
+}
+
+.date {
+    font-style: italic;
+}
+
+.article {
+    color: rgb(200, 175, 125);
+    text-align: left;
+}
+
+.article img {
+    width: 320px;
+    float: right;
+    margin: 0 0 30px 30px;
+}
+
+@media screen and (max-width: 720px) {
+    h2 {
+        margin-top: 5px;
+        font-size: 26px;
+        padding-bottom: 10px;
+    }
+
+    .article.logo {
+        width: 100%;
+    }
+
+    .article img {
+        float: none;
+        margin: 0 auto 20px auto;
+    }
+}
+
+/* ============================================================
+   App shell (app.component.css)
+   ============================================================ */
+
+.content {
+    background: black;
+    border: solid 2px rgb(0, 0, 150);
+    border-radius: 10px;
+    box-shadow: 0 0 100px rgba(110, 160, 255, 0.5);
+    margin-bottom: 100px;
+    padding: 50px 100px;
+    position: absolute;
+    top: 180px;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+@media screen and (max-width: 1140px) {
+    .content {
+        padding: 3% 6%;
+    }
+}
+
+/* ============================================================
+   Header (header.component.css)
+   ============================================================ */
+
+header {
+    padding: 20px 0;
+    height: 180px;
+    max-height: 180px;
+}
+
+header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: 300px;
+    height: auto;
+}
+
+/* Original used width:25% for 4 nav items; the Forum item was dropped,
+   so 3 items at 33.33% keep the bar balanced like the original. */
+.button-group {
+    display: inline-block;
+    float: left;
+    padding: 10px;
+    text-align: center;
+    width: 33.33333%;
+}
+
+@media screen and (max-width: 720px) {
+    .button-group {
+        padding: 10px 1px;
+    }
+}
+
+/* ---------- nav button group (button-group.component.css) ---------- */
+
+.navItem {
+    background: rgba(0, 0, 100, 1);
+    border: solid 2px black;
+    border-radius: 5px;
+    color: rgba(230, 230, 255, 1);
+    font-size: 1.5em;
+    font-weight: 300;
+    padding: 10px 0;
+}
+
+.navItem.highlighted {
+    background: rgba(0, 0, 255, 1);
+    border: solid 2px rgb(160, 210, 255);
+    box-shadow: 0 0 20px rgb(50, 150, 255);
+    color: white;
+}
+
+.button-group a {
+    text-decoration: none;
+}
+
+.subMenu {
+    background: rgba(0, 0, 100, 0.8);
+    border: solid 2px black;
+    box-shadow: 0 0 20px rgb(50, 150, 255);
+    margin-top: 5px;
+    padding: 5px;
+    position: relative;
+    z-index: 100;
+}
+
+.navSubItem {
+    color: rgb(50, 150, 255);
+    padding: 2px;
+    font-size: 1em;
+}
+
+/* original toggled .highlighted via an appHover directive; :hover is equivalent */
+.navSubItem.highlighted,
+.navSubItem:hover {
+    box-shadow: 0 0 5px rgb(170, 230, 255);
+    color: white;
+}
+
+@media screen and (max-width: 540px) {
+    .navItem {
+        font-size: 4vw;
+    }
+    .navSubItem {
+        font-size: 3vw;
+    }
+}
+
+/* ============================================================
+   Home (home.component.css)
+   ============================================================ */
+
+.home {
+    padding: 50px 0;
+}
+
+@media screen and (max-width: 1140px) {
+    .home {
+        padding: 3% 0;
+    }
+}
+
+/* Custom flex grid (not the Bootstrap columns) so gutters and bottom alignment
+   are exact. The big tile is twice the width of the side column, so the two
+   stacked side tiles (touching, gap:0) sum to exactly the big tile's height and
+   their bottoms line up. width:100% makes every tile fill and scale with the
+   window. */
+.home-grid {
+    display: flex;
+    gap: 14px;
+}
+
+.home-main {
+    flex: 2;
+}
+
+.home-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+}
+
+.home a {
+    display: block;
+}
+
+.home img {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid 1px green;
+    box-shadow: 0 0 5px white;
+}
+
+/* At md+ the side column sits beside the big tile. Give it a definite height via
+   aspect-ratio rather than letting its content size it: it's exactly half the big
+   tile's width, so an 8/9 ratio makes its height equal the big tile's height. The
+   two tiles then split that height (minus the 14px gap) and cover their slots, so
+   they keep a gap between them yet the lower tile's bottom lines up with the big
+   tile. The slots stay ~16:9 (matching the source), so the crop is tiny. */
+@media (min-width: 992px) {
+    .home-side {
+        aspect-ratio: 8 / 9;
+    }
+
+    .home-side > a {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .home-side img {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* Below the md breakpoint the side column drops under the big tile: stack the
+   grid and lay the two side tiles out in a row, with gaps for breathing room. */
+@media (max-width: 991px) {
+    .home-grid {
+        flex-direction: column;
+    }
+
+    .home-side {
+        flex-direction: row;
+    }
+
+    .home-side > a {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* ============================================================
+   News / Dev-diary list items (news-item + dev-diary-item .css)
+   Used by Pass 2 pages.
+   ============================================================ */
+
+/* The link wraps both the image and text columns. This grid is flex-based (the
+   columns aren't floated), so make the link a flex row itself, otherwise the
+   columns stack and the text lands under the image. flex-wrap lets them stack
+   on their own at the col-xs (full-width) breakpoint. flex:1 makes the link
+   fill the news-item width, otherwise it shrinks to its content and the image
+   column (a percentage of the link) ends up a different width per row, leaving
+   the text misaligned between rows. */
+.news-item a {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    text-align: left;
+}
+
+.news-item {
+    border: solid 1px green;
+    box-shadow: 0 0 5px white;
+    padding: 20px 5px;
+    margin-bottom: 10px;
+}
+
+.news-item img {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.news-item h4 {
+    color: rgb(200, 200, 200);
+}
+
+.news {
+    padding-bottom: 50px;
+}
+
+.dev-diary {
+    padding-bottom: 50px;
+}
+
+@media screen and (max-width: 1140px) {
+    .news,
+    .dev-diary {
+        padding-bottom: 3%;
+    }
+}
+
+/* ============================================================
+   Game — about / gallery / screenshot lightbox (Pass 2)
+   ============================================================ */
+
+.about img {
+    margin-top: 30px;
+}
+
+.gallery img {
+    border: solid 1px green;
+    box-shadow: 0 0 5px white;
+    margin: 0 auto;
+}
+
+.gallery a:hover {
+    cursor: pointer;
+}
+
+.gallery p {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 500;
+}
+
+.backdrop img {
+    width: 80%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.backdrop a:hover {
+    cursor: zoom-out;
+}
+
+/* ============================================================
+   Download (download.component.css)
+   ============================================================ */
+
+.download a {
+    color: white;
+    text-decoration: none;
+}
+
+.download button {
+    width: 150px;
+    margin: 20px;
+}
+
+.download p {
+    text-align: center;
+}
