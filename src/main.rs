@@ -29,7 +29,15 @@ fn App() -> impl IntoView {
     // RUNLING_BASE env var (to the repo name) at build time and builds with
     // `trunk build --release --public-url "/$RUNLING_BASE/"`. Unset for local dev,
     // so `trunk serve` keeps working at `/`.
-    let base: Cow<'static, str> = Cow::Borrowed(option_env!("RUNLING_BASE").unwrap_or(""));
+    //
+    // leptos_router's base must carry a leading slash: it strips the base as a
+    // prefix of the location pathname (which always starts with `/`), so a bare
+    // "runling" fails to match "/runling/…" and every route falls through to the
+    // not-found fallback. Build "/runling" from the repo name; stay "" locally.
+    let base: Cow<'static, str> = match option_env!("RUNLING_BASE") {
+        Some(repo) if !repo.is_empty() => Cow::Owned(format!("/{repo}")),
+        _ => Cow::Borrowed(""),
+    };
 
     view! {
         // Default document title; each page overrides it with its own <Title/>.
