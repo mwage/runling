@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::Title;
-use leptos_router::components::A;
+
+use crate::nav::Link;
 
 #[derive(Clone, Copy)]
 struct NewsEntry {
@@ -42,7 +43,7 @@ pub fn NewsList() -> impl IntoView {
                 .map(|news| {
                     view! {
                         <div class="row news-item">
-                            <A href=format!("/news/{}", news.id)>
+                            <Link href=format!("/news/{}", news.id)>
                                 <div class="col-md-3 col-sm-5 col-xs-12">
                                     <img
                                         class="img-responsive"
@@ -55,7 +56,7 @@ pub fn NewsList() -> impl IntoView {
                                     <p class="article">{news.description}</p>
                                     <p class="date">{news.date}</p>
                                 </div>
-                            </A>
+                            </Link>
                         </div>
                     }
                 })
@@ -157,7 +158,7 @@ pub fn News002() -> impl IntoView {
                     <li>"The \"Restart Game\" button now properly loads Level 1 of the game mode you are playing."</li>
                     <li>"Fixed a bug where adjusting your camera (while it was rotated) was messing up WASD camera movement."</li>
                 </ul>
-                <A href="/download">"You can get the demo here!"</A>
+                <Link href="/download">"You can get the demo here!"</Link>
                 <p>"We hope you like these changes and leave us your feedback in the forum!"</p>
             </div>
             <p class="date">"June 15, 2017"</p>

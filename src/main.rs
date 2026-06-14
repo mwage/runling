@@ -7,6 +7,7 @@ use leptos_router::components::{Route, Router, Routes};
 use leptos_router::path;
 
 mod components;
+mod nav;
 mod pages;
 
 use components::header::Header;
@@ -38,6 +39,10 @@ fn App() -> impl IntoView {
         Some(repo) if !repo.is_empty() => Cow::Owned(format!("/{repo}")),
         _ => Cow::Borrowed(""),
     };
+
+    // Internal links use the `nav::Link` component, which prefixes this base
+    // (absolute <A> hrefs otherwise bypass the router base). See nav.rs.
+    provide_context(nav::BasePath(base.clone()));
 
     view! {
         // Default document title; each page overrides it with its own <Title/>.

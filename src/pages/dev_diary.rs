@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::Title;
-use leptos_router::components::A;
+
+use crate::nav::Link;
 
 #[derive(Clone, Copy)]
 struct DiaryEntry {
@@ -36,7 +37,7 @@ pub fn DevDiaryList() -> impl IntoView {
                 .map(|entry| {
                     view! {
                         <div class="row news-item">
-                            <A href=format!("/dev-diary/{}", entry.id)>
+                            <Link href=format!("/dev-diary/{}", entry.id)>
                                 <div class="col-md-3 col-sm-5 col-xs-12">
                                     <img
                                         class="img-responsive"
@@ -49,7 +50,7 @@ pub fn DevDiaryList() -> impl IntoView {
                                     <p class="article">{entry.description}</p>
                                     <p class="date">{entry.date}</p>
                                 </div>
-                            </A>
+                            </Link>
                         </div>
                     }
                 })

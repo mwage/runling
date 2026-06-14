@@ -1,5 +1,6 @@
 use leptos::prelude::*;
-use leptos_router::components::A;
+
+use crate::nav::Link;
 
 #[derive(Clone, Copy)]
 pub struct NavLink {
@@ -58,11 +59,11 @@ fn ButtonGroup(button: NavLink, submenus: Vec<NavLink>) -> impl IntoView {
             on:mouseenter=move |_| set_selected.set(true)
             on:mouseleave=move |_| set_selected.set(false)
         >
-            <A href=button.path>
+            <Link href=button.path>
                 <div class="navItem" class:highlighted=move || selected.get()>
                     {button.name}
                 </div>
-            </A>
+            </Link>
             {move || {
                 (has_submenu && selected.get()).then(|| {
                     let items = submenus.clone();
@@ -72,9 +73,9 @@ fn ButtonGroup(button: NavLink, submenus: Vec<NavLink>) -> impl IntoView {
                                 .into_iter()
                                 .map(|sub| {
                                     view! {
-                                        <A href=sub.path>
+                                        <Link href=sub.path>
                                             <div class="navSubItem">{sub.name}</div>
-                                        </A>
+                                        </Link>
                                     }
                                 })
                                 .collect_view()}
